@@ -9,7 +9,7 @@ class Movie {
     public $plot;
     private $vote;
 
-    public function __construct(string $_title,string $_genre,int $_year,int $_vote)
+    public function __construct(string $_title,array $_genre,int $_year,int $_vote)
     {
         $this->title=$_title;
         $this->genre=$_genre;
@@ -23,8 +23,14 @@ class Movie {
         return $this->vote;
     }
 }
-
-$oldBoy= new Movie("Old Boy","Thriller",2003,9);
+$oldBoyGenres=[
+    "Thriller",
+    "Azione",
+    "Neo-Noir",
+    "Giallo",
+    "Drammatico",
+];
+$oldBoy= new Movie("Old Boy",$oldBoyGenres,2003,9);
 $oldBoy->director="Park Chan-wook";
 $oldBoy->language="Corean";
 $oldBoy->plot="1988. Oh Dae-su è un uomo comune che il giorno del quarto compleanno di sua figlia, dopo essere stato rilasciato dalla polizia che lo aveva arrestato per ubriachezza molesta, 
@@ -36,7 +42,14 @@ e per non impazzire Dae-su impegna il tempo scrivendo un'autobiografia, allenand
 Trascorsi quindici anni, Dae-su improvvisamente viene liberato sul tetto di un palazzo in un punto imprecisato della città. Vagando per le strade, incontra un barbone che gli si avvicina
 e gli consegna un portafoglio pieno di banconote di grosso taglio e un cellulare, che lo mette in contatto con il suo misterioso rapitore. L'uomo lo sfida: se vuole sapere l'identità 
 e le ragioni della reclusione e al contempo continuare a esistere, ha cinque giorni di tempo per trovarlo.";
-$snowpiercer= new Movie("Snowpiercer","Azione",2013,8);
+$snowpiercerGenres=[
+    "Fantascienza",
+    "Azione",
+    "Drammatico",
+    "Avventura",
+    "Thriller",
+];
+$snowpiercer= new Movie("Snowpiercer",$snowpiercerGenres,2013,8);
 $snowpiercer->director="Bong Joon-ho";
 $snowpiercer->language="English";
 $snowpiercer->plot="2031. In un mondo decimato da una nuova era glaciale, causata da esperimenti falliti per fermare il riscaldamento globale, un gruppo di sopravvissuti rimane in vita 
@@ -63,14 +76,50 @@ figlio, dal menomato Andrew e da un infiltrato segreto che li aiuta inviando lor
     <h2><?php echo $oldBoy->title ?></h2>
     <ul>
         <?php foreach($oldBoy as $info){ ?>
-            <li><?php echo $info ?></li>
+            <li>
+                <?php 
+                    if($info!=$oldBoy->genre){
+                        echo $info ;
+                    }else{
+                ?>
+                <ul>
+                    <?php
+                         foreach($oldBoy->genre as $genre){
+                    ?>
+                    <li><?php echo $genre ?></li>
+                    <?php
+                        }
+                    ?>
+                </ul>
+                <?php           
+                    }
+                ?>
+            </li>
         <?php } ?>
         <li><?php echo $oldBoy->getVote() ?></li>
     </ul>
     <h2><?php echo $snowpiercer->title ?></h2>
     <ul>
         <?php foreach($snowpiercer as $info){ ?>
-            <li><?php echo $info ?></li>
+            <li>
+                <?php 
+                    if($info!=$snowpiercer->genre){
+                        echo $info ;
+                    }else{
+                ?>
+                <ul>
+                    <?php
+                         foreach($snowpiercer->genre as $genre){
+                    ?>
+                    <li><?php echo $genre ?></li>
+                    <?php
+                        }
+                    ?>
+                </ul>
+                <?php           
+                    }
+                ?>
+            </li>
         <?php } ?>
         <li><?php echo $snowpiercer->getVote() ?></li>
     </ul>
